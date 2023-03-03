@@ -11,7 +11,20 @@ public class ConsultaClienteComponent {
     private final ClienteRepository clienteRepository;
 
     public Boolean verificaSeClienteExiste(String cpf) {
+        return this.verificaCpf(cpf);
+    }
+
+    public Boolean verificaCpfCliente(String cpf) {
+        return this.verificaCpf(cpf);
+    }
+
+    public Boolean verificaSenhaCliente(String senha) {
+        return this.clienteRepository.findBySenha(senha).isPresent();
+    }
+
+    private Boolean verificaCpf(String cpf) {
         return this.clienteRepository.findById(cpf).isPresent();
     }
+
 
 }
