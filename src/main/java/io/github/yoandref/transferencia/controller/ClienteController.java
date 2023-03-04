@@ -1,8 +1,7 @@
 package io.github.yoandref.transferencia.controller;
 
-import io.github.yoandref.transferencia.dto.ClienteLoginDTO;
-import io.github.yoandref.transferencia.dto.ClienteRequestDTO;
-import io.github.yoandref.transferencia.dto.TrocaSenhaClienteRequestDTO;
+import io.github.yoandref.transferencia.dto.*;
+import io.github.yoandref.transferencia.entity.Cliente;
 import io.github.yoandref.transferencia.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,11 +27,17 @@ public class ClienteController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/trocaSenhaCliente{cpf}")
+    @PatchMapping("/trocaSenhaCliente/{cpf}")
     public ResponseEntity<?> trocaSenhaCliente(@PathVariable(value = "cpf") String cpf,
                                                @RequestBody TrocaSenhaClienteRequestDTO clienteTrocaSenhaRequestDTO) {
-        this.clienteService.trocaSenhaCliente(clienteTrocaSenhaRequestDTO, cpf);
-        return null;
+        AvisosDTO avisosDTO = this.clienteService.trocaSenhaCliente(clienteTrocaSenhaRequestDTO, cpf);
+        return new ResponseEntity(avisosDTO, HttpStatus.OK);
     }
 
+    @PatchMapping("/trocaNomeCliente/{cpf}")
+    public ResponseEntity<?> trocaNomeCliente(@PathVariable(value = "cpf") String cpf,
+                                               @RequestBody TrocaNomeClienteDTO trocaNomeClienteDTO) {
+        this.clienteService.trocaNomeCliente(trocaNomeClienteDTO, cpf);
+        return null;
+    }
 }

@@ -13,14 +13,14 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class GenericoHandlerException extends ResponseEntityExceptionHandler {
+public class UnprocessableEntityGenericHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {
             ClienteInexistenteException.class,
             DuplicidadeClienteException.class,
             NovaSenhaInvalidaException.class
     })
-    public ResponseEntity<Object> handlerGenerico(RuntimeException ex, WebRequest webRequest) {
+    public ResponseEntity<Object> unprocessableEntityGenericHandler(RuntimeException ex, WebRequest webRequest) {
         AvisosDTO avisosDTO = new AvisosDTO();
         avisosDTO.setMensagem(ex.getMessage());
         return handleExceptionInternal(ex, avisosDTO, new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY, webRequest);

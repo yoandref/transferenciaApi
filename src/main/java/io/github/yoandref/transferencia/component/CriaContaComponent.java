@@ -22,10 +22,10 @@ public class CriaContaComponent {
         String agencia = RandomStringUtils.randomNumeric(4);
 
         Conta conta = new Conta();
-        conta.setCliente(cliente);
         conta.setContaChaveCompostaId(new ContaChaveComposta(numeroConta, agencia));
         conta.setCodigoBanco("0000");
         conta.setDataHoraCriacao(LocalDateTime.now());
+        conta.setCpf(cliente.getCpf());
         conta.setSaldo(BigDecimal.ZERO);
         return this.contaRepository.save(conta);
     }

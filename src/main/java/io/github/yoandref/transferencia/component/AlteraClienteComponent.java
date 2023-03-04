@@ -1,5 +1,6 @@
 package io.github.yoandref.transferencia.component;
 
+import io.github.yoandref.transferencia.dto.AvisosDTO;
 import io.github.yoandref.transferencia.entity.Cliente;
 import io.github.yoandref.transferencia.exception.ClienteInexistenteException;
 import io.github.yoandref.transferencia.repository.ClienteRepository;
@@ -23,4 +24,16 @@ public class AlteraClienteComponent {
         cliente.setSenha(novaSenha);
         return this.clienteRepository.save(cliente);
     }
+
+    public Cliente alteraNomeCliente(String cpf, String primeiroNomeAtual, String novoPrimeiroNome) {
+        Optional<Cliente> optionalCliente = this.clienteRepository.findByCpfAndNome(cpf, primeiroNomeAtual);
+        if(optionalCliente.isEmpty()) {
+            throw new ClienteInexistenteException("Cliente não encontrado!");
+        }
+        Cliente cliente = optionalCliente.get();
+        cliente.setNome(novoPrimeiroNome);
+        return this.clienteRepository.save(cliente);
+    }
+
+
 }

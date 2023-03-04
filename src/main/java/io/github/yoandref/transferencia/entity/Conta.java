@@ -24,9 +24,8 @@ public class Conta {
     @Column(name = "SALDO")
     private BigDecimal saldo;
 
-    @ManyToOne
-    @JoinColumn(name = "cpf")
-    private Cliente cliente;
+    @Column(name = "cpf")
+    private String cpf;
 
 }
 

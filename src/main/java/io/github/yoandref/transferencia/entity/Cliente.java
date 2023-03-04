@@ -25,7 +25,7 @@ public class Cliente {
     @Column(name = "SENHA")
     private String senha;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cpf")
     private List<Conta> conta;
 
     public static Cliente converter(ClienteRequestDTO clienteRequestDTO) {
